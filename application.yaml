@@ -11,7 +11,7 @@ spec:
     namespace: demo1
     server: https://kubernetes.default.svc
   source:
-    repoURL: <YOUR_NEW_REPO_URL>
+    repoURL: https://github.com/shanthakumartk/argocd-gitops-tanzu.git
     targetRevision: HEAD
     path: tkc
   syncPolicy:

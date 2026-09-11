@@ -40,7 +40,7 @@ argocd account update-password
 
 ```bash
 argocd app create tkc-deploy \
-  --repo <YOUR_NEW_REPO_URL> \
+  --repo https://github.com/shanthakumartk/argocd-gitops-tanzu.git \
   --path tkc \
   --dest-server https://kubernetes.default.svc \
   --dest-namespace demo1 \

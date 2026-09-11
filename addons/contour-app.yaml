@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: <YOUR_NEW_REPO_URL>
+    repoURL: https://github.com/shanthakumartk/argocd-gitops-tanzu.git
     targetRevision: HEAD
     path: contour
   destination:
