@@ -1,6 +1,6 @@
 # Apply this AFTER gitops-tkc1 is Provisioned and registered with
 # `argocd cluster add <gitops-tkc1-context>`.
-# Replace <WORKLOAD_CLUSTER_SERVER> with the value argocd shows for the
+# Replace https://192.168.10.14:6443 with the value argocd shows for the
 # registered cluster (`argocd cluster list`).
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -14,7 +14,7 @@ spec:
     targetRevision: HEAD
     path: cert-manager
   destination:
-    server: <WORKLOAD_CLUSTER_SERVER>
+    server: https://192.168.10.14:6443
   syncPolicy:
     automated:
       prune: true
