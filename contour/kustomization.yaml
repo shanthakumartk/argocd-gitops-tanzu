@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- https://projectcontour.io/quickstart/contour.yaml
+
+# Uncomment and point at the Harbor Supervisor Service (svc-harbor-domain-c8) as a
+# pull-through cache if Docker Hub rate-limits the envoyproxy/envoy image, same
+# workaround the papivot/argocd-gitops-tanzu repo uses with its own Harbor instance.
+# images:
+# - name: docker.io/envoyproxy/envoy
+#   newName: <harbor-fqdn>/proxy-cache/envoyproxy/envoy

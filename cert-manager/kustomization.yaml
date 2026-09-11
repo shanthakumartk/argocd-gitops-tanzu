@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Upstream manifest referenced remotely (not vendored) to keep this repo small.
+# If the ArgoCD instance's kustomize build restricts remote bases, replace this
+# `resources` entry with a locally vendored cert-manager.yaml instead.
+resources:
+- https://github.com/cert-manager/cert-manager/releases/download/v1.16.2/cert-manager.yaml

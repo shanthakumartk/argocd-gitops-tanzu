@@ -1,0 +1,40 @@
+# VKS workload cluster, GitOps-managed by ArgoCD.
+# Modeled directly on the live, Provisioned `vks-demo1` Cluster resource on this same
+# Supervisor (wld03-cls01/domain-c8) -- confirmed working ClusterClass/variables for this
+# environment, as opposed to papivot/argocd-gitops-tanzu's older `tanzukubernetescluster`
+# ClusterClass which does not exist here.
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: Cluster
+metadata:
+  name: gitops-tkc1
+  namespace: demo1
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks: ["192.168.156.0/20"]
+    services:
+      cidrBlocks: ["10.96.0.0/12"]
+    serviceDomain: cluster.local
+  topology:
+    classRef:
+      name: builtin-generic-v3.5.0
+      namespace: vmware-system-vks-public
+    version: v1.34.2+vmware.2
+    controlPlane:
+      replicas: 1
+      metadata:
+        annotations:
+          run.tanzu.vmware.com/resolve-os-image: os-name=photon
+    workers:
+      machineDeployments:
+        - class: node-pool
+          name: gitops-tkc1-np-workers
+          replicas: 1
+          metadata:
+            annotations:
+              run.tanzu.vmware.com/resolve-os-image: os-name=photon
+    variables:
+      - name: vmClass
+        value: best-effort-medium
+      - name: storageClass
+        value: vsan-default-storage-policy

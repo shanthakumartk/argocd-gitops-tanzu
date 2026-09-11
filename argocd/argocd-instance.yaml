@@ -1,0 +1,11 @@
+# Native VKS Supervisor Service ArgoCD instance.
+# Deployed into the vSphere Namespace that will also host the GitOps-managed workload cluster.
+# Replaces papivot/argocd-gitops-tanzu's manual install.yaml + RBAC-patch + `kubectl patch svc ... LoadBalancer` steps.
+apiVersion: argocd-service.vsphere.vmware.com/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  namespace: demo1
+spec:
+  version: 3.4.4+vmware.1-vks.1
+  enableLoadBalancer: true

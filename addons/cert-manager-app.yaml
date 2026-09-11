@@ -1,0 +1,20 @@
+# Apply this AFTER gitops-tkc1 is Provisioned and registered with
+# `argocd cluster add <gitops-tkc1-context>`.
+# Replace <WORKLOAD_CLUSTER_SERVER> with the value argocd shows for the
+# registered cluster (`argocd cluster list`).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tkc-addons-gitops-tkc1-certmanager
+  namespace: demo1
+spec:
+  project: default
+  source:
+    repoURL: <YOUR_NEW_REPO_URL>
+    targetRevision: HEAD
+    path: cert-manager
+  destination:
+    server: <WORKLOAD_CLUSTER_SERVER>
+  syncPolicy:
+    automated:
+      prune: true

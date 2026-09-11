@@ -1,0 +1,19 @@
+# Top-level ArgoCD Application: syncs tkc/cluster.yaml into the demo1 namespace,
+# which the Supervisor's Cluster API then turns into a real VKS workload cluster.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tkc-deploy
+  namespace: demo1
+spec:
+  project: default
+  destination:
+    namespace: demo1
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: <YOUR_NEW_REPO_URL>
+    targetRevision: HEAD
+    path: tkc
+  syncPolicy:
+    automated:
+      prune: true
